@@ -32,7 +32,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.headers().frameOptions().disable();
 
 		httpSecurity.authorizeRequests().antMatchers("/login", "/h2-console/**", "/h2-console**").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/users**", "/api/users/**", "/api/employees/roles").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/users**", "/api/users/**", "/api/roles").hasAnyRole("ADMIN")
 				.antMatchers(HttpMethod.GET, "/api/employees**", "/api/employees/{id}", "/api/employees/search/{name}",
 						"/api/employees/sort")
 				.hasAnyRole("USER", "ADMIN").antMatchers(HttpMethod.POST, "/api/employees**", "/api/employees/**")

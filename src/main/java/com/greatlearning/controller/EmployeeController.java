@@ -26,46 +26,46 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeController {
 
-	private final EmployeeService employeeSevice;
+	private final EmployeeService employeeService;
 
 	@GetMapping
 	public List<Employee> listEmployees() {
-		return employeeSevice.getAllEmployees();
+		return employeeService.getAllEmployees();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public String save(@RequestBody Employee employee) {
-		employeeSevice.saveEmployee(employee);
+		employeeService.saveEmployee(employee);
 		return "Employee details saved";
 	}
 
 	@GetMapping("/{id}")
 	public Employee getEmployeeById(@PathVariable long id) {
-		return employeeSevice.getEmployeeById(id);
+		return employeeService.getEmployeeById(id);
 	}
 
 	@GetMapping("/search/{name}")
 	public List<Employee> getEmployeeByName(@PathVariable String name) {
-		return employeeSevice.getEmployeeByName(name);
+		return employeeService.getEmployeeByName(name);
 	}
 
 	@GetMapping("/sort")
 	public List<Employee> getEmployeeSortedByName(
 			@RequestParam(name = "order", required = false, defaultValue = "asc") String direction) {
-		return employeeSevice.getEmployeeSortedByName(direction);
+		return employeeService.getEmployeeSortedByName(direction);
 	}
 
 	@PutMapping("/{id}")
 	public String update(@PathVariable long id, @RequestBody Employee employee) {
-		employeeSevice.updateById(id, employee);
+		employeeService.updateById(id, employee);
 		return "Employee id: " + id + " got updated";
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable long id) {
-		employeeSevice.deleteById(id);
+		employeeService.deleteById(id);
 	}
 
 }
